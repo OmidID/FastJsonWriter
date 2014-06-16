@@ -13,13 +13,13 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Fastjsonwriter by OmidID</title>
+    <title>Super Fast Json Writer/Serializer by OmidID</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
-        <h1>Fastjsonwriter</h1>
+        <h1 style="font-size: 32px;">Super Fast Json Writer/Serializer</h1>
         <h2>A minimalistic and super fast compile base JSON writer/serializer, for .NET</h2>
         <a href="https://github.com/OmidID/FastJsonWriter" class="button"><small>View project on</small>GitHub</a>
       </div>
@@ -28,10 +28,155 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1>
-<a name="fastjsonwriter" class="anchor" href="#fastjsonwriter"><span class="octicon octicon-link"></span></a>FastJsonWriter</h1>
+			<h1><a name="welcome" class="anchor" href="#welcome"><span class="octicon octicon-link"></span></a>Welcome!</h1>
 
-<p>A minimalistic and super fast compile base JSON writer/serializer, for .NET</p>
+			<p>FastJsonWriter is a compile base tools for writer or create a JSON document from object(s).</p>
+			<p>This project help you to have super fast manual like JSON writer!</p>
+        </section>
+		
+		<section id="main-content">
+			<h1><a name="how-is-it-work" class="anchor" href="#how-is-it-work"><span class="octicon octicon-link"></span></a>How is it work!</h1>
+
+			<p>FastJsonWriter generate C# code for your specific object that you want to serialize to JSON. 
+				and then compile it to assembly using CodeProvider</p>
+			<p>
+				Now you have a direct JSON writer for your object. I think this is the fastest way to generate JSON code ever.</br>
+				FastJsonWriter cache all compiled assembly and re use assembly while project is running.
+			</p>
+        </section>
+
+		<section id="main-content">
+			<h1><a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use!</h1>
+
+			<p>
+				Download the source and add <strong style="font-weight: bold;">FastJsonWriter.cs</strong> to your project. and then use it very easily.
+			</p>
+			<pre style="font-family:Consolas;font-size:19;color:gainsboro;background:#1e1e1e;"><span style="color:#569cd6;">var</span>&nbsp;json&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#4ec9b0;">JsonWriter</span><span style="color:#b4b4b4;">.</span>WriteJson(YourObject);</pre>
+			<p>For better performance, for large scale is better to use GetWriter to Cache Json Writer!</p>
+			<pre style="font-family:Consolas;font-size:19;color:gainsboro;background:#1e1e1e;"><span style="color:#569cd6;">var</span>&nbsp;writer&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#4ec9b0;">JsonWriter</span><span style="color:#b4b4b4;">.</span>GetWriter<span style="color:#b4b4b4;">&lt;</span>YourClassName<span style="color:#b4b4b4;">&gt;</span>();
+writer<span style="color:#b4b4b4;">.</span>Writer(TextWriter,&nbsp;YourObject);
+<span style="color:#57a64a;">//Or</span>
+<span style="color:#569cd6;">var</span>&nbsp;json&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;writer<span style="color:#b4b4b4;">.</span>Write(YourObject);</pre>
+			
+        </section>
+
+		<section id="main-content">
+			<h1><a name="benchmark" class="anchor" href="#benchmark"><span class="octicon octicon-link"></span></a>Benchmark</h1>
+
+			<p>After the research I've done. I found that the fastest Json Writer is StackServer.<br/>
+			So I got all the tests compared to StackServer
+			</p>
+			<center><img src="images/chart_1.png" /></center>
+			
+			<h2>Write 1,000,000 item </h2>
+			<code>
+			<pre style="font-family:Consolas;font-size:19;color:gainsboro;background:#1e1e1e;"><span style="color:#569cd6;">var</span>&nbsp;b&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">b</span>();
+b<span style="color:#b4b4b4;">.</span>Username&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#d69d85;">&quot;OmidID&quot;</span>;
+b<span style="color:#b4b4b4;">.</span>BornYear&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">1985</span>;
+b<span style="color:#b4b4b4;">.</span>ID&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">10225445554</span>;
+b<span style="color:#b4b4b4;">.</span>Another&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">c</span>()&nbsp;{&nbsp;Title&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#d69d85;">&quot;Test&nbsp;Title&quot;</span>&nbsp;};
+b<span style="color:#b4b4b4;">.</span>MyList&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">a</span>();
+b<span style="color:#b4b4b4;">.</span>MyList<span style="color:#b4b4b4;">.</span>Add(<span style="color:#d69d85;">&quot;Test&nbsp;1&quot;</span>);
+b<span style="color:#b4b4b4;">.</span>MyList<span style="color:#b4b4b4;">.</span>Add(<span style="color:#d69d85;">&quot;Test&nbsp;2&quot;</span>);
+b<span style="color:#b4b4b4;">.</span>MyList<span style="color:#b4b4b4;">.</span>Add(<span style="color:#d69d85;">&quot;Test&nbsp;3&quot;</span>);
+b<span style="color:#b4b4b4;">.</span>MyList<span style="color:#b4b4b4;">.</span>Add(<span style="color:#d69d85;">&quot;Test&nbsp;4&quot;</span>);
+ 
+<span style="color:#569cd6;">var</span>&nbsp;writer&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#4ec9b0;">JsonWriter</span><span style="color:#b4b4b4;">.</span>GetWriter<span style="color:#b4b4b4;">&lt;</span><span style="color:#4ec9b0;">b</span><span style="color:#b4b4b4;">&gt;</span>();
+ 
+<span style="color:#569cd6;">var</span>&nbsp;w&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">Stopwatch</span>();
+<span style="color:#569cd6;">using</span>&nbsp;(<span style="color:#569cd6;">var</span>&nbsp;wr&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;System<span style="color:#b4b4b4;">.</span>IO<span style="color:#b4b4b4;">.</span><span style="color:#4ec9b0;">StringWriter</span>())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;w<span style="color:#b4b4b4;">.</span>Reset();
+&nbsp;&nbsp;&nbsp;&nbsp;w<span style="color:#b4b4b4;">.</span>Start();
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">for</span>&nbsp;(<span style="color:#569cd6;">var</span>&nbsp;i&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">0</span>;&nbsp;i&nbsp;<span style="color:#b4b4b4;">&lt;</span>&nbsp;<span style="color:#b5cea8;">1000000</span>;&nbsp;i<span style="color:#b4b4b4;">++</span>)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4ec9b0;">JsonWriter</span><span style="color:#b4b4b4;">.</span>WriteJson(wr,&nbsp;b);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;w<span style="color:#b4b4b4;">.</span>Stop();
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//Write&nbsp;using&nbsp;JsonWriter</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4ec9b0;">Console</span><span style="color:#b4b4b4;">.</span>WriteLine(w<span style="color:#b4b4b4;">.</span>ElapsedMilliseconds<span style="color:#b4b4b4;">.</span>ToString());
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;w<span style="color:#b4b4b4;">.</span>Reset();
+&nbsp;&nbsp;&nbsp;&nbsp;w<span style="color:#b4b4b4;">.</span>Start();
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">for</span>&nbsp;(<span style="color:#569cd6;">var</span>&nbsp;i&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">0</span>;&nbsp;i&nbsp;<span style="color:#b4b4b4;">&lt;</span>&nbsp;<span style="color:#b5cea8;">1000000</span>;&nbsp;i<span style="color:#b4b4b4;">++</span>)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;writer<span style="color:#b4b4b4;">.</span>Writer(wr,&nbsp;b);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;w<span style="color:#b4b4b4;">.</span>Stop();
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//Write&nbsp;using&nbsp;JsonWriterCache</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4ec9b0;">Console</span><span style="color:#b4b4b4;">.</span>WriteLine(w<span style="color:#b4b4b4;">.</span>ElapsedMilliseconds<span style="color:#b4b4b4;">.</span>ToString());
+}
+ 
+ 
+w<span style="color:#b4b4b4;">.</span>Reset();
+w<span style="color:#b4b4b4;">.</span>Start();
+<span style="color:#569cd6;">for</span>&nbsp;(<span style="color:#569cd6;">var</span>&nbsp;i&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">0</span>;&nbsp;i&nbsp;<span style="color:#b4b4b4;">&lt;</span>&nbsp;<span style="color:#b5cea8;">1000000</span>;&nbsp;i<span style="color:#b4b4b4;">++</span>)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">var</span>&nbsp;outstr&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;ServiceStack<span style="color:#b4b4b4;">.</span><span style="color:#4ec9b0;">DynamicJson</span><span style="color:#b4b4b4;">.</span>Serialize(b);
+}
+w<span style="color:#b4b4b4;">.</span>Stop();
+<span style="color:#57a64a;">//Write&nbsp;using&nbsp;ServiceStack</span>
+<span style="color:#4ec9b0;">Console</span><span style="color:#b4b4b4;">.</span>WriteLine(w<span style="color:#b4b4b4;">.</span>ElapsedMilliseconds<span style="color:#b4b4b4;">.</span>ToString());
+</pre>
+			</code>
+			
+			<h2>Write a item with 1,000,000 array object</h2>
+			<code>
+			<pre style="font-family:Consolas;font-size:19;color:gainsboro;background:#1e1e1e;">
+<span style="color:#569cd6;">var</span>&nbsp;f&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">arr</span>();
+f<span style="color:#b4b4b4;">.</span>coll&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">sub_arr</span>[<span style="color:#b5cea8;">1</span>];
+f<span style="color:#b4b4b4;">.</span>coll[<span style="color:#b5cea8;">0</span>]&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">sub_arr</span>()&nbsp;{&nbsp;Name&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#d69d85;">&quot;a&quot;</span>&nbsp;};
+ 
+<span style="color:#569cd6;">var</span>&nbsp;writer_f&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#4ec9b0;">JsonWriter</span><span style="color:#b4b4b4;">.</span>GetWriter<span style="color:#b4b4b4;">&lt;</span><span style="color:#4ec9b0;">arr</span><span style="color:#b4b4b4;">&gt;</span>();
+f<span style="color:#b4b4b4;">.</span>coll&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">sub_arr</span>[<span style="color:#b5cea8;">1000000</span>];
+ 
+<span style="color:#569cd6;">for</span>&nbsp;(<span style="color:#569cd6;">var</span>&nbsp;i&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">0</span>;&nbsp;i&nbsp;<span style="color:#b4b4b4;">&lt;</span>&nbsp;f<span style="color:#b4b4b4;">.</span>coll<span style="color:#b4b4b4;">.</span>Length;&nbsp;i<span style="color:#b4b4b4;">++</span>)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;f<span style="color:#b4b4b4;">.</span>coll[i]&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#569cd6;">new</span>&nbsp;<span style="color:#4ec9b0;">sub_arr</span>&nbsp;{&nbsp;Name&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;i<span style="color:#b4b4b4;">.</span>ToString()&nbsp;};
+}
+ 
+ 
+w<span style="color:#b4b4b4;">.</span>Reset();
+w<span style="color:#b4b4b4;">.</span>Start();
+<span style="color:#569cd6;">var</span>&nbsp;test_f&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#4ec9b0;">JsonWriter</span><span style="color:#b4b4b4;">.</span>WriteJson(f);
+w<span style="color:#b4b4b4;">.</span>Stop();
+<span style="color:#57a64a;">//Write&nbsp;using&nbsp;JsonWriter</span>
+<span style="color:#4ec9b0;">Console</span><span style="color:#b4b4b4;">.</span>WriteLine(w<span style="color:#b4b4b4;">.</span>ElapsedMilliseconds<span style="color:#b4b4b4;">.</span>ToString());
+ 
+w<span style="color:#b4b4b4;">.</span>Reset();
+w<span style="color:#b4b4b4;">.</span>Start();
+test_f&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;writer_f<span style="color:#b4b4b4;">.</span>Write(f);
+w<span style="color:#b4b4b4;">.</span>Stop();
+<span style="color:#57a64a;">//Write&nbsp;using&nbsp;JsonWriterCache</span>
+<span style="color:#4ec9b0;">Console</span><span style="color:#b4b4b4;">.</span>WriteLine(w<span style="color:#b4b4b4;">.</span>ElapsedMilliseconds<span style="color:#b4b4b4;">.</span>ToString());
+ 
+w<span style="color:#b4b4b4;">.</span>Reset();
+w<span style="color:#b4b4b4;">.</span>Start();
+test_f&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;ServiceStack<span style="color:#b4b4b4;">.</span><span style="color:#4ec9b0;">DynamicJson</span><span style="color:#b4b4b4;">.</span>Serialize(f);
+w<span style="color:#b4b4b4;">.</span>Stop();
+<span style="color:#57a64a;">//Write&nbsp;using&nbsp;ServiceStack</span>
+<span style="color:#4ec9b0;">Console</span><span style="color:#b4b4b4;">.</span>WriteLine(w<span style="color:#b4b4b4;">.</span>ElapsedMilliseconds<span style="color:#b4b4b4;">.</span>ToString());
+</pre>
+			</code>
+			
+        </section>
+
+		<section id="main-content">
+			<h1><a name="version" class="anchor" href="#version"><span class="octicon octicon-link"></span></a>Beta version!</h1>
+
+			<p>
+				I'm so sorry for beta version, currently I'm working on to complete this project.<br/>
+				Currently FastJsonWriter dose not support few datatype like Datetime. and also is not support for custom property name.
+			</p>
+			<p>
+				If you want special feature or if you got some error please write me Issue in link below:<br/>
+				<a href="https://github.com/OmidID/FastJsonWriter/issues">Issues</a>
+			</p>
+        </section>
+
+		<section id="main-content">
+			<h1><a name="parser" class="anchor" href="#parser"><span class="octicon octicon-link"></span></a>Looking for Json Parser?</h1>
+
+			<p>
+				This project only work on JSON writer. and if you want to have a JSON Parser you can use this project (this is my favorite project)
+				<br/>
+				<a href="https://github.com/ysharplanguage/FastJsonParser"><h3>FastJsonParser</h3></a>
+			</p>
         </section>
 
         <aside id="sidebar">
