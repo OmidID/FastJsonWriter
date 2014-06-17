@@ -105,8 +105,6 @@ namespace System.Text.Json {
             globalCodes.AppendLine("}");
             globalCodes.AppendLine("}");
 
-            //System.IO.File.WriteAllText(@"D:\Projects\Website\Panjere.AppService\Panjere.AppService.Web\goodd.cs", globalCodes.ToString());
-
             var parms = new CompilerParameters {
                 GenerateExecutable = false,
                 GenerateInMemory = false,
